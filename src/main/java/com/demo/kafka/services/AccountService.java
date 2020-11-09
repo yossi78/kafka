@@ -1,20 +1,14 @@
 package com.demo.kafka.services;
 
-import com.demo.kafka.dto.Account;
-import com.demo.kafka.kafka.KafkaListener;
-import com.demo.kafka.kafka.KafkaSender;
 import com.demo.kafka.utils.XmlUtil;
 import net.minidev.json.JSONObject;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 

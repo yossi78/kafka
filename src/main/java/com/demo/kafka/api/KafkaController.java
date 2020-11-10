@@ -1,6 +1,8 @@
 package com.demo.kafka.api;
 
+import ch.qos.logback.core.joran.spi.XMLUtil;
 import com.demo.kafka.services.AccountService;
+import com.demo.kafka.utils.XmlUtil;
 import net.minidev.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +38,7 @@ public class KafkaController {
             accountService.addAccount(account);
             org.json.JSONObject resultJson = accountService.consumeAccount();
             logger.info("Account has been added successfully");
-            return new ResponseEntity(resultJson.toString(),HttpStatus.CREATED);
+            return new ResponseEntity(XmlUtil.convertToPretty(resultJson),HttpStatus.CREATED);
         }catch (Exception e){
             logger.error("Failed to add new Account",e);
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);

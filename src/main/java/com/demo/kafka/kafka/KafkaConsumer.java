@@ -1,6 +1,5 @@
 package com.demo.kafka.kafka;
 import com.demo.kafka.utils.XmlUtil;
-import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -15,7 +14,6 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 
@@ -29,7 +27,7 @@ public class KafkaConsumer {
 
 
     @Value("${kafka.consumer.topic}")
-    private String topic;
+    private String TOPIC;
 
 
     @Autowired
@@ -43,7 +41,7 @@ public class KafkaConsumer {
     @PostConstruct
     public void postInit(){
         List<String> topicList = new ArrayList<>();
-        topicList.add(topic);
+        topicList.add(TOPIC);
         consumer.subscribe(topicList);
     }
 
@@ -67,7 +65,7 @@ public class KafkaConsumer {
 
     //@KafkaListener(topics = "${kafka.consumer.topic}", groupId = "${spring.kafka.consumer.group-id}")
     public JSONObject consume(String message) throws IOException {
-        logger.info(String.format("\n#### -> Consumed message -> %s\n", message));
+        logger.info(String.format("\n Consumed message -> %s\n", message));
         JSONObject jsonObject = XmlUtil.convertToJSONObject(message);
         logger.info("\n" + XmlUtil.convertToPretty(jsonObject));
         return jsonObject;

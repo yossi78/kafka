@@ -1,4 +1,5 @@
 package com.demo.kafka.kafka;
+
 import com.demo.kafka.utils.XmlUtil;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.json.JSONObject;
@@ -6,10 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.Duration;

@@ -1,4 +1,5 @@
 package com.demo.kafka.utils;
+
 import org.json.JSONObject;
 import org.json.XML;
 
@@ -7,7 +8,6 @@ import org.json.XML;
 
 
 public class XmlUtil {
-
 
 
     public static String convertToXML(JSONObject json , String root) {

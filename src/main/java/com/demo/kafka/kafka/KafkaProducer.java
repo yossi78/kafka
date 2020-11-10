@@ -16,8 +16,12 @@ public class KafkaProducer{
     private static final Logger logger = LoggerFactory.getLogger(KafkaProducer.class);
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${kafka.producer.topic}")
-    private String topic;
+    @Value("${kafka.producer.topic1}")
+    private String topic1;
+
+
+    @Value("${kafka.producer.topic2}")
+    private String topic2;
 
 
     @Autowired
@@ -29,7 +33,8 @@ public class KafkaProducer{
 
     public void sendMessage(String message) {
         logger.info(String.format("#### -> Producing message -> %s", message));
-        this.kafkaTemplate.send(topic, message);
+        this.kafkaTemplate.send(topic1, message);
+        this.kafkaTemplate.send(topic2, message);
     }
 
 }

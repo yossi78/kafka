@@ -51,7 +51,7 @@ public class KafkaController {
     @GetMapping(value = "/health")
     public ResponseEntity healthCheck() {
         try {
-            return new ResponseEntity("Account Service Health is OK", HttpStatus.OK);
+            return new ResponseEntity("Kafka Service Health is OK", HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e.getCause(),HttpStatus.INTERNAL_SERVER_ERROR);
         }

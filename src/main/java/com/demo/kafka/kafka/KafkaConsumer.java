@@ -34,7 +34,6 @@ public class KafkaConsumer {
     public KafkaConsumer(ConcurrentKafkaListenerContainerFactory kafkaListenerContainerFactory) {
         this.kafkaListenerContainerFactory = kafkaListenerContainerFactory;
         consumer=(org.apache.kafka.clients.consumer.KafkaConsumer)kafkaListenerContainerFactory.getConsumerFactory().createConsumer();
-        System.out.println(consumer.groupMetadata());
     }
 
 

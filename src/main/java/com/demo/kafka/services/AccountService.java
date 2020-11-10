@@ -9,9 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Iterator;
-import java.util.Map;
 
+import java.util.*;
 
 
 @Service
@@ -34,13 +33,8 @@ public class AccountService {
         org.json.JSONObject json=convertToOrgJSONObejct(account);
         String xml = XmlUtil.convertToXML(json,"root");
         kafkaProducer.sendMessage(xml);
-        System.out.println("finish");
-
+        logger.info("finish to add account");
     }
-
-
-
-
 
 
     public  org.json.JSONObject convertToOrgJSONObejct(net.minidev.json.JSONObject jsonObject) {
@@ -50,19 +44,19 @@ public class AccountService {
 
 
     public org.json.JSONObject consumeAccount() {
-
-
-
-
-//        ConsumerRecords<Long, String> records= null;
-//        System.out.println("xxx");
-//        Iterator iter = records.iterator();
-
-//        Map<Long, String> map = (Map<Long, String>)iter.next();
-//        String xmlStr = (String)map.keySet().toArray()[0];
-//        System.out.println(xmlStr);
-        org.json.JSONObject jsonObject = XmlUtil.convertToJSONObject("xmlStr");
+        ConsumerRecords<String, String> records= kafkaConsumer.consumeMessages();
+        String xml=getStringValues(records).get(0);
+        logger.info(xml);
+        org.json.JSONObject jsonObject = XmlUtil.convertToJSONObject(xml);
+        logger.info("\n" + XmlUtil.convertToPretty(jsonObject));
         return jsonObject;
+    }
 
+
+
+    private List<String> getStringValues(ConsumerRecords<String, String> records){
+        List<String> list  = new ArrayList<>();
+        records.iterator().forEachRemaining(c->list.add(c.value()));
+        return list;
     }
 }

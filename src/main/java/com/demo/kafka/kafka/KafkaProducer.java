@@ -1,5 +1,6 @@
 package com.demo.kafka.kafka;
 
+import com.demo.kafka.dto.Account;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

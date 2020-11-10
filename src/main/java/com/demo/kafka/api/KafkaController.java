@@ -14,16 +14,16 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/v1/accounts")
-public class AccountController {
+@RequestMapping(value = "/v1/kafka")
+public class KafkaController {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(AccountController.class);
+    private static final Logger logger = LoggerFactory.getLogger(KafkaController.class);
     private AccountService accountService;
 
 
     @Autowired
-    public AccountController(AccountService accountService){
+    public KafkaController(AccountService accountService){
         this.accountService = accountService;
     }
 
@@ -36,16 +36,12 @@ public class AccountController {
             accountService.addAccount(account);
             org.json.JSONObject resultJson = accountService.consumeAccount();
             logger.info("Account has been added successfully");
-            return new ResponseEntity(resultJson,HttpStatus.CREATED);
+            return new ResponseEntity(resultJson.toString(),HttpStatus.CREATED);
         }catch (Exception e){
             logger.error("Failed to add new Account",e);
             return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
-
 
 
 
